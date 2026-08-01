@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:18
+    container_name: student-deadlines-db
+    environment:
+      # Credenciales de desarrollo local únicamente. Este archivo es público:
+      # nunca poner aquí una contraseña real. En producción van por variables
+      # de entorno inyectadas por la plataforma.
+      POSTGRES_DB: deadlines
+      POSTGRES_USER: deadlines
+      POSTGRES_PASSWORD: localdev
+    ports:
+      - "5432:5432"
+    volumes:
+      # Postgres 18+ monta /var/lib/postgresql, NO /var/lib/postgresql/data.
+      # La imagen guarda los datos en un subdirectorio por version mayor para
+      # que `pg_upgrade --link` no cruce el limite del punto de montaje.
+      # Con la ruta antigua el contenedor arranca y muere al instante.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      # Sin esto, `docker compose up -d` devuelve el control antes de que
+      # Postgres acepte conexiones, y la app falla al arrancar.
+      test: ["CMD-SHELL", "pg_isready -U deadlines -d deadlines"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
