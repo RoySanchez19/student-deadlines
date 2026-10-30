@@ -1,5 +1,7 @@
 # student-deadlines
 
+> **AI-assisted learning project.** Roy confirmed that this project was developed with AI assistance. The reviewed source is an early backend scaffold: one entity, repository query, and migration. No API, authentication, document parser, or verified public service is implemented. A guided explanation and a small understood change are the next learning step. Source review: October 30, 2026; the service was not started in this review.
+
 International students in the US carry a set of dates that do not forgive being
 late. The I-20 program end date. The window to file for OPT. Whether the travel
 signature is still valid before leaving the country. Miss one and the
@@ -10,7 +12,7 @@ in an email from two years ago, a screenshot in a phone gallery, and whatever
 somebody remembers a friend saying. So students end up asking each other, or
 asking their advisor the same question a hundred other students already asked.
 
-This is a tool for keeping those dates in one place and knowing what is coming.
+The project goal is a tool for keeping student-entered dates in one place. The current scaffold does not yet provide that complete workflow.
 
 ## What it is not
 
@@ -26,9 +28,9 @@ That boundary is a design constraint, not a disclaimer bolted on at the end.
 An I-20 contains a SEVIS ID, a date of birth, and a home address. Holding that
 for other people is a real responsibility, not a footnote.
 
-So the system is built to **read a document, extract the dates, and keep only the
-dates**. The document itself is never persisted. There is less to leak because
-there is less being stored.
+A possible future design is to **read a document, extract dates, and keep only the
+dates**. Document parsing and that retention workflow are not implemented or
+verified in the current source. Use synthetic data while learning.
 
 ## Status
 
